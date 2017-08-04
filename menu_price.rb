@@ -25,8 +25,25 @@ $b= Watir::Browser.new(:remote,
   :url => "http://zaqwsx1:zqybk75kc8SQJmSXFKvg@hub-cloud.browserstack.com/wd/hub",
   :desired_capabilities => caps)
 
+$b.driver.manage.window.maximize
+sleep 5
+$b.goto "http://staging.redlobster.ca/locations?utm_content=see-all"
 
-$b.goto "http://yahoo.com"
+sleep 5
+
+$b.refresh
+if $b.alert.exists?
+    $b.alert.text
+    $b.alert.ok 
+end
+sleep 5
+$b.text_field(:name => "enter-zip").select
+$b.send_keys "Toronto"
+sleep 5
+$b.element(:id => "B-btn").click
+sleep 5
+$b.links(:class => "round button map-set-location").first.click
+sleep 5
 end 
 
 
